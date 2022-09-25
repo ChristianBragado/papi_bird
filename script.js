@@ -42,7 +42,16 @@ function jump(){ //jump function for the papi
     },10);
 }
 
-var sound = new Howl({
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    let now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+let sound = new Howl({
     src: ['sounds/music.mp3'],
     autoplay: true,
     loop: true,
